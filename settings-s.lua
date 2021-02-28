@@ -1,0 +1,8 @@
+NAME_DB = "players_data"
+HOST_VALUE = "127.0.0.1"
+PORT_VALUE = "3306"
+USER_NAME = "root"
+USER_PASSWORD = "12345"
+SIZE_OF_PAGE = 4
+MAX_COUNT_QUERY_PER_SECOND = 1
+STRING_FOR_CONNECTION = "dbname=" .. NAME_DB .. ";host=" .. HOST_VALUE .. ";port=" .. PORT_VALUE
