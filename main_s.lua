@@ -20,7 +20,7 @@ setTimer( function()
 		table.remove( tPoolForQueries, i )
 	end
 	count_made_queries = counter
-end, 20000, 0 )
+end, 1000, 0 )
 
 local function addDB( qh, data )
 	local not_error = dbPoll( qh, 0 )
