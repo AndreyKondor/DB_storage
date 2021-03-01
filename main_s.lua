@@ -20,7 +20,7 @@ setTimer( function()
 		table.remove( tPoolForQueries, i )
 	end
 	count_made_queries = counter
-end, 1000, 0 )
+end, 20000, 0 )
 
 local function addDB( qh, data )
 	local not_error = dbPoll( qh, 0 )
@@ -109,7 +109,7 @@ addEventHandler( "onAddingNewDataToDB", resourceRoot, function( jsonData )
 	if count_made_queries >= MAX_COUNT_QUERY_PER_SECOND then
 		outputChatBox( "Ожидайте, запрос будет выполнен чуть позже" )
 		table.insert( tPoolForQueries, { addDB, 
-			dbPrepareString( DB_CONNECTION,  "INSERT INTO everydata(jsonPar) VALUES(?) ON DUPLICATE KEY UPDATE jsonPar = jsonPar", jsonData ), 
+			dbPrepareString( DB_CONNECTION,  QUERY_FOR_ADDING_DATA, jsonData, jsonData ), 
 				client, jsonData } )
 		return
 	end
@@ -117,7 +117,7 @@ addEventHandler( "onAddingNewDataToDB", resourceRoot, function( jsonData )
 	count_made_queries = count_made_queries + 1
 
 	dbQuery( addDB, { jsonData }, DB_CONNECTION, 
-		"INSERT INTO everydata(jsonPar) VALUES(?) ON DUPLICATE KEY UPDATE jsonPar = jsonPar", jsonData )
+		QUERY_FOR_ADDING_DATA, jsonData, jsonData )
 end )
 
 addEvent( "onModifyingDataToDB", true )
